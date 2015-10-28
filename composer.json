@@ -18,10 +18,10 @@
             "url": "http://packages.zendframework.com/"
         }
     ],
-    "minimum-stability": "dev",
+    "minimum-stability": "stable",
     "require": {
         "php": ">=5.3.3",
-        "zendframework/zendframework": "dev-master",
-        "doctrine/doctrine-orm-module": "dev-master"
+        "zendframework/zendframework": "~2.0",
+        "doctrine/doctrine-orm-module": "dev-master@dev"
     }
 }
