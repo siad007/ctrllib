@@ -55,29 +55,6 @@ class AbstractController extends AbstractActionController
     }
 
     /**
-     * Sets a logger
-     *
-     * @param \Zend\Log\Logger $logger
-     * @return AbstractController
-     */
-    public function setLogger(\Zend\Log\Logger $logger)
-    {
-        $this->logger = $logger;
-        return $this;
-    }
-
-    /**
-     * @return \Ctrl\Log\Logger
-     */
-    public function getLogger()
-    {
-        if (!$this->logger) {
-            $this->logger = $this->getServiceLocator()->get('Log');
-        }
-        return $this->logger;
-    }
-
-    /**
      * The methods below provide subclasses with code completion
      * they contain method overrides or calls that would
      * normally trigger a controller plugin.
