@@ -4,6 +4,8 @@ namespace CtrlTest\Mvc\View\Http;
 
 use CtrlTest\ApplicationTestCase;
 use Ctrl\Mvc\View\Http\InjectTemplateListener;
+use Zend\Router\RouteMatch;
+use Zend\Router\RouterFactory;
 
 class InjectTemplateListenerTest extends ApplicationTestCase
 {
@@ -25,9 +27,9 @@ class InjectTemplateListenerTest extends ApplicationTestCase
     public function testDoesInjectTemplateWhenInModuleNamespace()
     {
         $e = new \Zend\Mvc\MvcEvent();
-        $routerFactory = new \Zend\Mvc\Service\RouterFactory();
+        $routerFactory = new RouterFactory();
 
-        $routeMatch = new \Zend\Mvc\Router\Http\RouteMatch(array(
+        $routeMatch = new RouteMatch(array(
             '__NAMESPACE__' => 'Ctrl\Module\Test\Controller',
             'controller' => 'Index',
             'action' => 'index'
@@ -36,8 +38,8 @@ class InjectTemplateListenerTest extends ApplicationTestCase
         $e->setRouteMatch($routeMatch)
             ->setController('Index')
             ->setControllerClass('Ctrl\Module\Test\Controller\Index')
-            ->setTarget('Ctrl\Module\Test\Controller\Index')
-            ->setResult(new \Zend\View\Model\ViewModel());
+            ->setTarget('Ctrl\Module\Test\Controller\Index');
+        $e->setResult(new \Zend\View\Model\ViewModel());
 
         $this->listener->injectTemplate($e);
         $this->assertEquals('ctrl/test/index/index', $e->getResult()->getTemplate());
@@ -46,9 +48,9 @@ class InjectTemplateListenerTest extends ApplicationTestCase
     public function testDoesNotInjectTemplateWhenInModuleNamespace()
     {
         $e = new \Zend\Mvc\MvcEvent();
-        $routerFactory = new \Zend\Mvc\Service\RouterFactory();
+        $routerFactory = new RouterFactory();
 
-        $routeMatch = new \Zend\Mvc\Router\Http\RouteMatch(array(
+        $routeMatch = new \Zend\Router\Http\RouteMatch(array(
             '__NAMESPACE__' => 'App\Controller',
             'controller' => 'Index',
             'action' => 'index'
@@ -57,8 +59,8 @@ class InjectTemplateListenerTest extends ApplicationTestCase
         $e->setRouteMatch($routeMatch)
             ->setController('Index')
             ->setControllerClass('App\Controller\Index')
-            ->setTarget('App\Controller\Index')
-            ->setResult(new \Zend\View\Model\ViewModel());
+            ->setTarget('App\Controller\Index');
+        $e->setResult(new \Zend\View\Model\ViewModel());
 
         $this->listener->injectTemplate($e);
         $this->assertEquals('', $e->getResult()->getTemplate());

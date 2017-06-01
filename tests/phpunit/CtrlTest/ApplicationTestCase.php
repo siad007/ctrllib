@@ -29,7 +29,7 @@ abstract class ApplicationTestCase extends \PHPUnit_Framework_TestCase
         $config = new \Zend\Config\Config(include __DIR__.'/../../test.config.php');
         $config->merge(new \Zend\Config\Config($this->defaultApplicationConfig));
         $config->merge(new \Zend\Config\Config($configuration));
-        $serviceManager = new ServiceManager(new ServiceManagerConfig($config->toArray()));
+        $serviceManager = new ServiceManager((new ServiceManagerConfig($config->toArray()))->toArray());
         $serviceManager->setService('ApplicationConfig', $config);
         $serviceManager->setFactory('ServiceListener', 'Zend\Mvc\Service\ServiceListenerFactory');
         /* @var $moduleManager \Zend\ModuleManager\ModuleManagerInterface */

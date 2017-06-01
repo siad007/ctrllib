@@ -2,12 +2,13 @@
 
 namespace Ctrl\Domain;
 
+use Ctrl\Service\AbstractDomainModelService;
+use Ctrl\Service\AbstractDomainService;
 use Zend\ServiceManager\ServiceLocatorInterface;
 use Zend\ServiceManager\ServiceLocatorAwareInterface;
 
 abstract class PersistableServiceLocatorAwareModel
     extends PersistableModel
-    implements ServiceLocatorAwareInterface
 {
     /**
      * @var ServiceLocatorInterface

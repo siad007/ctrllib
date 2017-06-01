@@ -2,14 +2,10 @@
 
 namespace Ctrl\Service;
 
-use Ctrl\Service\AbstractDomainModelService;
-use Zend\ServiceManager;
 use Zend\ServiceManager\ServiceLocatorInterface;
-
 use Doctrine\ORM\EntityManager;
 
 abstract class AbstractDomainService implements
-    ServiceManager\ServiceLocatorAwareInterface,
     \Ctrl\ServiceManager\EntityManagerAwareInterface
 {
     /**

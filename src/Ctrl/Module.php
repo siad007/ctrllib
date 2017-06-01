@@ -60,33 +60,33 @@ class Module
             ),
             'controller_plugins' => array(
                 'invokables' => array(
-                    'CtrlRedirect' => 'Ctrl\Mvc\Controller\Plugin\Redirect',
+                    'CtrlRedirect' => Mvc\Controller\Plugin\Redirect::class,
                 ),
                 'aliases' => array(
-                    'redirect' => 'CtrlRedirect'
+                    'Redirect' => 'CtrlRedirect'
                 )
             ),
             'view_helpers' => array(
                 'invokables' => array(
-                    'CtrlNavigation' => 'Ctrl\View\Helper\Navigation\Navigation',
-                    'FormatDate' => 'Ctrl\View\Helper\FormatDate',
-                    'CtrlJsLoader' => 'Ctrl\CtrlJs\ViewHelper\CtrlJsLoader',
-                    'PageTitle' => 'Ctrl\View\Helper\TwitterBootstrap\PageTitle',
-                    'CtrlFormInput' => 'Ctrl\View\Helper\TwitterBootstrap\Form\CtrlFormInput',
-                    'CtrlForm' => 'Ctrl\View\Helper\TwitterBootstrap\Form\CtrlForm',
-                    'CtrlFormErrors' => 'Ctrl\View\Helper\TwitterBootstrap\Form\CtrlFormErrors',
-                    'CtrlButton' => 'Ctrl\View\Helper\TwitterBootstrap\Form\CtrlButton',
-                    'CtrlFormActions' => 'Ctrl\View\Helper\TwitterBootstrap\Form\CtrlFormActions',
-                    'OrderControls' => 'Ctrl\View\Helper\TwitterBootstrap\OrderControls',
-                    'ButtonBar' => 'Ctrl\View\Helper\TwitterBootstrap\ButtonBar',
-                    'ButtonGroup' => 'Ctrl\View\Helper\TwitterBootstrap\ButtonGroup',
+                    'CtrlNavigation' => View\Helper\Navigation\Navigation::class,
+                    'FormatDate' => View\Helper\FormatDate::class,
+                    'CtrlJsLoader' => CtrlJs\ViewHelper\CtrlJsLoader::class,
+                    'PageTitle' => View\Helper\TwitterBootstrap\PageTitle::class,
+                    'CtrlFormInput' => View\Helper\TwitterBootstrap\Form\CtrlFormInput::class,
+                    'CtrlForm' => View\Helper\TwitterBootstrap\Form\CtrlForm::class,
+                    'CtrlFormErrors' => View\Helper\TwitterBootstrap\Form\CtrlFormErrors::class,
+                    'CtrlButton' => View\Helper\TwitterBootstrap\Form\CtrlButton::class,
+                    'CtrlFormActions' => View\Helper\TwitterBootstrap\Form\CtrlFormActions::class,
+                    'OrderControls' => View\Helper\TwitterBootstrap\OrderControls::class,
+                    'ButtonBar' => View\Helper\TwitterBootstrap\ButtonBar::class,
+                    'ButtonGroup' => View\Helper\TwitterBootstrap\ButtonGroup::class,
                 ),
                 'aliases' => array(
-                    'navigation' => 'CtrlNavigation'
+                    'Navigation' => 'CtrlNavigation'
                 )
             ),
             'app_log' => array(
-                'class' => '\Ctrl\Log\Logger',
+                'class' => Log\Logger::class,
                 'writers' => array(
                     array (
                         'writer' => 'stream',
@@ -114,9 +114,9 @@ class Module
     {
         return array(
             'factories' => array(
-                'DomainServiceLoader'       => 'Ctrl\Service\DomainServiceLoaderFactory',
-                'CtrlAcl'                   => 'Ctrl\Permissions\AclFactory',
-                'Log'                       => 'Ctrl\Log\LogFactory',
+                'DomainServiceLoader'       => Service\DomainServiceLoaderFactory::class,
+                'CtrlAcl'                   => Permissions\AclFactory::class,
+                'Log'                       => Log\LogFactory::class,
             ),
             'aliases' => array(
                 'Acl' => 'CtrlAcl'

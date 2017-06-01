@@ -25,7 +25,7 @@ class DomainServiceLoaderTest extends ApplicationTestCase
     {
         $serviceManager = $this->getServiceManager($this->defaultConfig);
         $factory = new \Ctrl\Service\DomainServiceLoaderFactory();
-        $this->serviceLoader = $factory->createService($serviceManager);
+        $this->serviceLoader = $factory->__invoke($serviceManager);
     }
 
     protected function teardown()

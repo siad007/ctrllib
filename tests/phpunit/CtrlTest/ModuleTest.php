@@ -2,6 +2,9 @@
 
 namespace CtrlTest;
 
+use Ctrl\View\Helper\Navigation\Navigation;
+use Ctrl\Mvc\Controller\Plugin\Redirect;
+
 class ModuleTest extends ApplicationTestCase
 {
     public function testCanRetrieveDomainServiceLoader()
@@ -14,13 +17,13 @@ class ModuleTest extends ApplicationTestCase
     {
         $loader = $this->getApplicationServiceManager()->get('ControllerPluginManager');
         $redirectPlugin = $loader->get('Redirect');
-        $this->assertInstanceOf('\Ctrl\Mvc\Controller\Plugin\Redirect', $redirectPlugin);
+        $this->assertInstanceOf(Redirect::class, $redirectPlugin);
     }
 
     public function testHasOverridenDefaultNavigationViewHelper()
     {
-        $loader = $this->getApplicationServiceManager()->get('ViewHelperManager');
+        $loader = $this->getApplicationServiceManager()->get('Navigation');
         $navHelper = $loader->get('Navigation');
-        $this->assertInstanceOf('\Ctrl\View\Helper\Navigation\Navigation', $navHelper);
+        $this->assertInstanceOf(Navigation::class, $navHelper);
     }
 }

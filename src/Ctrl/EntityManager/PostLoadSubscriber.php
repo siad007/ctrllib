@@ -9,7 +9,7 @@ use Zend\ServiceManager\ServiceManager;
 use Zend\ServiceManager\ServiceLocatorAwareInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
 
-class PostLoadSubscriber implements EventSubscriber, ServiceLocatorAwareInterface
+class PostLoadSubscriber implements EventSubscriber
 {
     protected $serviceLocator;
 
@@ -51,7 +51,7 @@ class PostLoadSubscriber implements EventSubscriber, ServiceLocatorAwareInterfac
     {
         $entity = $args->getEntity();
         /** @var $entity ServiceLocatorAwareInterface */
-        if ($entity instanceof ServiceLocatorAwareInterface) {
+        if (method_exists($entity, 'setServiceLocator')) {
             $entity->setServiceLocator($this->serviceLocator);
         }
     }

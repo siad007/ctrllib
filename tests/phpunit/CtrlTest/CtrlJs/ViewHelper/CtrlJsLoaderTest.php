@@ -18,8 +18,6 @@ class CtrlJsLoaderTest extends \PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        \Zend\View\Helper\Placeholder\Registry::unsetRegistry();
-
         $this->basePath = __DIR__ . '/_files/modules';
 
         $renderer = new \Zend\View\Renderer\PhpRenderer();

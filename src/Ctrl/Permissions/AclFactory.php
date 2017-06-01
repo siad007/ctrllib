@@ -2,16 +2,17 @@
 
 namespace Ctrl\Permissions;
 
-use Zend\ServiceManager\FactoryInterface;
+use Interop\Container\ContainerInterface;
+use Zend\ServiceManager\Factory\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
 
 class AclFactory implements FactoryInterface
 {
     const DEFAULT_CLASS_ACL = 'Ctrl\Permissions\Acl';
 
-    public function createService(ServiceLocatorInterface $serviceManager)
+    public function __invoke(ContainerInterface $container, $requestedName = '', array $options = null)
     {
-        $config = $serviceManager->get('Configuration');
+        $config = $container->get('Configuration');
         if (!isset($config['acl'])) {
             throw new \Ctrl\Exception('acl was not configured');
         }

@@ -28,7 +28,7 @@ class AclFactoryTest extends ApplicationTestCase
     public function testThrowsExceptionIfConfigKeyIsMissing()
     {
         $serviceManager = $this->getServiceManager();
-        $instance = $this->factory->createService($serviceManager);
+        $instance = $this->factory->__invoke($serviceManager);
     }
 
     public function testInstantiatesCorrectDefaultClass()
@@ -40,7 +40,7 @@ class AclFactoryTest extends ApplicationTestCase
                 )
             )
         ));
-        $instance = $this->factory->createService($serviceManager);
+        $instance = $this->factory->__invoke($serviceManager);
 
         $this->assertInstanceOf('Ctrl\Permissions\Acl', $instance);
         $this->assertEquals('Ctrl\Permissions\Acl', get_class($instance));
@@ -53,7 +53,7 @@ class AclFactoryTest extends ApplicationTestCase
                 'class' => 'CtrlTest\Permissions\TestAssets\CustomAcl',
             )
         ));
-        $instance = $this->factory->createService($serviceManager);
+        $instance = $this->factory->__invoke($serviceManager);
 
         $this->assertInstanceOf('Ctrl\Permissions\Acl', $instance);
         $this->assertInstanceOf('CtrlTest\Permissions\TestAssets\CustomAcl', $instance);
@@ -69,7 +69,7 @@ class AclFactoryTest extends ApplicationTestCase
                 )
             )
         ));
-        $instance = $this->factory->createService($serviceManager);
+        $instance = $this->factory->__invoke($serviceManager);
 
         $this->assertEquals(3, count($instance->getResources()));
         $this->assertTrue($instance->hasResource(\Ctrl\Permissions\Resources::SET_GLOBAL));
@@ -85,7 +85,7 @@ class AclFactoryTest extends ApplicationTestCase
                 )
             )
         ));
-        $instance = $this->factory->createService($serviceManager);
+        $instance = $this->factory->__invoke($serviceManager);
 
         //var_dump($instance->getResources());
         $this->assertEquals(5, count($instance->getResources()));

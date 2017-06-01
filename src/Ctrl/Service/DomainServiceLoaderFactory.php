@@ -2,8 +2,8 @@
 
 namespace Ctrl\Service;
 
-use Zend\ServiceManager\FactoryInterface;
-use Zend\ServiceManager\ServiceLocatorAwareInterface;
+use Interop\Container\ContainerInterface;
+use Zend\ServiceManager\Factory\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
 use Zend\ServiceManager\ServiceManager;
 use Zend\ServiceManager\Config;
@@ -16,26 +16,27 @@ class DomainServiceLoaderFactory implements FactoryInterface
      * @param ServiceLocatorInterface|ServiceManager $serviceLocator
      * @return mixed
      */
-    public function createService(ServiceLocatorInterface $serviceLocator)
+    public function __invoke(ContainerInterface $container, $requestedName = '', array $options = null)
     {
-        $config = $serviceLocator->get('Configuration');
+        $config = $container->get('Configuration');
         $serviceConfig = new Config(
             isset($config['domain_services']) ? $config['domain_services'] : array()
         );
 
-        $domainServiceFactory = new ServiceManager($serviceConfig);
-        $serviceLocator->addPeeringServiceManager($domainServiceFactory);
+        $domainServiceFactory = new ServiceManager($serviceConfig->toArray());
+        // $container->addPeeringServiceManager($domainServiceFactory);
 
-        $domainServiceFactory->addInitializer(function ($instance) use ($serviceLocator) {
+        $domainServiceFactory->addInitializer(function ($instance) use ($container) {
+            /*
             if ($instance instanceof ServiceLocatorAwareInterface)
                 $instance->setServiceLocator($serviceLocator->get('Zend\ServiceManager\ServiceLocatorInterface'));
-
+            */
             if ($instance instanceof EventManagerAwareInterface)
-                $instance->setEventManager($serviceLocator->get('EventManager'));
+                $instance->setEventManager($container->get('EventManager'));
 
             if ($instance instanceof EntityManagerAwareInterface) {
                 try {
-                    $instance->setEntityManager($serviceLocator->get('EntityManager'));
+                    $instance->setEntityManager($container->get('EntityManager'));
                 } catch (\Zend\ServiceManager\Exception\ServiceNotFoundException $e) {
                     // no entitymanager set
                     // TODO: log

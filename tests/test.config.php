@@ -5,6 +5,7 @@ return array(
         //'display_errors' => 'On',
     ),
     'modules' => array(
+        'Zend\Router',
         'DoctrineModule',
         'DoctrineORMModule',
         'Ctrl'
